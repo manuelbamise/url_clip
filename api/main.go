@@ -1,30 +1,26 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	v1Routes "github.com/manuelbamise/url_clip/v1/routes"
 )
 
 func main() {
-	mux := http.NewServeMux()
 
-	mux.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-		fmt.Fprintln(w, "Hello, from the root route")
+	r := chi.NewRouter()
+
+	r.Use(middleware.Logger)
+	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("welcome"))
 	})
 
-	v1Routes.RegisterMainRoutes(mux)
+	r.Mount("/v1", v1Routes.MainRouter())
 
-	server := http.Server{
-		Addr:    ":8080",
-		Handler: mux,
-	}
+	log.Println("server started on :8080")
+	http.ListenAndServe(":8080", r)
 
-	log.Println("Server started on :8080")
-	err := server.ListenAndServe()
-	if err != nil {
-		fmt.Println(err)
-	}
 }

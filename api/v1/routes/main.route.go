@@ -3,12 +3,17 @@ package v1Routes
 import (
 	"net/http"
 
+	"github.com/go-chi/chi/v5"
 	handlers "github.com/manuelbamise/url_clip/handlers"
 )
 
-func RegisterMainRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("/v1/", func(w http.ResponseWriter, _ *http.Request) {
+func MainRouter() chi.Router {
+	r := chi.NewRouter()
+	r.Mount("/url", urlRouter())
+
+	r.Get("/", func(w http.ResponseWriter, _ *http.Request) {
 		handlers.JsonHanlder(w, http.StatusOK, map[string]any{"statue": "success", "message": "Message from v1 route"})
 	})
-	registerUrlRoutes(mux)
+
+	return r
 }
