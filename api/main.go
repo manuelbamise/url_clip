@@ -6,10 +6,17 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/manuelbamise/url_clip/v1/db"
 	v1Routes "github.com/manuelbamise/url_clip/v1/routes"
 )
 
 func main() {
+
+	db, err := db.InitDB()
+	if err != nil {
+		log.Fatalf("failed to init database: %v", err)
+	}
+	defer db.Close()
 
 	r := chi.NewRouter()
 
