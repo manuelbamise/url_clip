@@ -12,11 +12,10 @@ import (
 
 func main() {
 
-	db, err := db.InitDB()
+	_, err := db.InitDB()
 	if err != nil {
 		log.Fatalf("failed to init database: %v", err)
 	}
-	defer db.Close()
 
 	r := chi.NewRouter()
 

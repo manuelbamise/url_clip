@@ -1,26 +1,26 @@
 package db
 
 import (
-	"database/sql"
 	"log"
 
-	_ "modernc.org/sqlite"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 )
 
-var DB *sql.DB
+var DB *gorm.DB
 
-func InitDB() (*sql.DB, error) {
+func InitDB() (*gorm.DB, error) {
 	var err error
-	DB, err = sql.Open("sqlite", "./url_clip.db")
+	DB, err = gorm.Open(sqlite.Open("./url_clip.db"), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("failed to open database: %v", err)
 		return nil, err
 	}
 
-	if err := DB.Ping(); err != nil {
-		log.Fatalf("failed to ping database: %v", err)
-		return nil, err
-	}
+	// if err := DB.Ping(); err != nil {
+	// 	log.Fatalf("failed to ping database: %v", err)
+	// 	return nil, err
+	// }
 
 	log.Println("database connected successfully...")
 
