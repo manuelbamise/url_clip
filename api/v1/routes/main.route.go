@@ -12,7 +12,7 @@ func MainRouter() chi.Router {
 	r.Mount("/url", urlRouter())
 
 	r.Get("/", func(w http.ResponseWriter, _ *http.Request) {
-		handlers.JsonHanlder(w, http.StatusOK, map[string]any{"statue": "success", "message": "Message from v1 route"})
+		handlers.JsonHanlder(w, http.StatusOK, map[string]any{"statue": "success", "message": "V1 route is running well!!"})
 	})
 
 	return r
