@@ -1,16 +1,12 @@
 package v1Routes
 
 import (
-	"net/http"
-
 	"github.com/go-chi/chi/v5"
-	"github.com/manuelbamise/url_clip/handlers"
+	v1Controllers "github.com/manuelbamise/url_clip/v1/controllers"
 )
 
 func urlRouter() chi.Router {
 	r := chi.NewRouter()
-	r.Get("/", func(w http.ResponseWriter, _ *http.Request) {
-		handlers.JsonHanlder(w, http.StatusOK, map[string]any{"statue": "success", "message": "Message from url route", "data": map[string]any{"url": "http:jsds", "anotherData": "asjfdf"}})
-	})
+	r.Get("/", v1Controllers.RootMethod)
 	return r
 }
