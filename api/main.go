@@ -18,8 +18,10 @@ func main() {
 	}
 
 	r := chi.NewRouter()
-
 	r.Use(middleware.Logger)
+	r.Use(middleware)
+
+
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("welcome"))
 	})
