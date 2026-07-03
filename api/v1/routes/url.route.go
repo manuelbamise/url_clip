@@ -7,6 +7,9 @@ import (
 
 func urlRouter() chi.Router {
 	r := chi.NewRouter()
-	r.Get("/", v1Controllers.RootMethod)
+	r.Get("/", v1Controllers.GetAllUrls)
+	// r.Post("/", v1Controllers.)
+	//
+
 	return r
 }
