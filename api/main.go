@@ -17,7 +17,9 @@ func main() {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Timeout(60 * time.Second))
 
-	_, err := db.InitDB()
+	database, err := db.InitDB()
+	r.Use(db.SetDBMiddleware(database))
+
 	if err != nil {
 		log.Fatalf("failed to init database: %v", err)
 	}

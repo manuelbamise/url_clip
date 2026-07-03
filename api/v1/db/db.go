@@ -17,11 +17,6 @@ func InitDB() (*gorm.DB, error) {
 		return nil, err
 	}
 
-	// if err := DB.Ping(); err != nil {
-	// 	log.Fatalf("failed to ping database: %v", err)
-	// 	return nil, err
-	// }
-
 	log.Println("database connected successfully...")
 
 	return DB, nil
