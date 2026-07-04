@@ -1,8 +1,6 @@
 package v1Services
 
 import (
-	"errors"
-
 	"github.com/manuelbamise/url_clip/utils"
 	"github.com/manuelbamise/url_clip/v1/db"
 	"gorm.io/gorm"
@@ -41,17 +39,14 @@ func GetUrlByUrlLink(database *gorm.DB, input_url string) {
 
 }
 
-func UrlExistsByCode(database *gorm.DB, url_code string) error {
+func UrlExistsByCode(database *gorm.DB, url_code string) (bool, error) {
 	var url db.Url
+	var count int64
 
-	result := database.Where("url_code=?", url_code).First(&url)
+	result := database.Model(&url).Where("url_code=?", url_code).Count(&count)
 	if result.Error == nil {
-		return errors.New("Record already exists")
+		return count > 0, result.Error
 	}
 
-	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-		return nil
-	}
-
-	return result.Error
+	return count > 0, result.Error
 }
