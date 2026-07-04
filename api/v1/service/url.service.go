@@ -1,11 +1,22 @@
 package v1Services
 
 import (
+	"github.com/manuelbamise/url_clip/utils"
 	"github.com/manuelbamise/url_clip/v1/db"
 	"gorm.io/gorm"
 )
 
-func CreateUrl(url string, database *gorm.DB) (*gorm.DB, error) {
+func CreateUrl(input_url string, database *gorm.DB) (*gorm.DB, error) {
+	code, err := utils.GenerateCode(5)
+	if err != nil {
+		return nil, err
+	}
+
+	url := db.Url{
+		Url_link: input_url,
+		Url_code: code,
+	}
+
 	result := database.Create(&url)
 	return result, result.Error
 }

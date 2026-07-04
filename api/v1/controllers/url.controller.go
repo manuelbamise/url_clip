@@ -38,5 +38,11 @@ func CreateUrl(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	url
+	url, err := v1Services.CreateUrl(urlInput.url, database)
+	if err != nil {
+		handlers.JsonHanlder(w, http.StatusBadRequest, map[string]any{"status": "error", "message": err.Error()})
+		return
+	}
+
+	handlers.JsonHanlder(w, http.StatusCreated, map[string]any{"status": "success", "message": "Url created successfully", "data": url})
 }
