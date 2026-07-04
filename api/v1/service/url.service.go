@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func CreateUrl(input_url string, database *gorm.DB) (*gorm.DB, error) {
+func CreateUrl(input_url string, database *gorm.DB) (*db.Url, error) {
 	code, err := utils.GenerateCode(5)
 	if err != nil {
 		return nil, err
@@ -18,7 +18,7 @@ func CreateUrl(input_url string, database *gorm.DB) (*gorm.DB, error) {
 	}
 
 	result := database.Create(&url)
-	return result, result.Error
+	return &url, result.Error
 }
 
 func GetAllUrls(database *gorm.DB) ([]db.Url, error) {

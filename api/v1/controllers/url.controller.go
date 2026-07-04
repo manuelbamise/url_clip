@@ -2,6 +2,7 @@ package v1Controllers
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/manuelbamise/url_clip/handlers"
@@ -30,7 +31,7 @@ func CreateUrl(w http.ResponseWriter, r *http.Request) {
 	database := r.Context().Value("DB").(*gorm.DB)
 
 	var urlInput struct {
-		url string `json:"url"`
+		Url string `json:"url"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&urlInput); err != nil {
@@ -38,7 +39,9 @@ func CreateUrl(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	url, err := v1Services.CreateUrl(urlInput.url, database)
+	log.Println(urlInput.Url)
+
+	url, err := v1Services.CreateUrl(urlInput.Url, database)
 	if err != nil {
 		handlers.JsonHanlder(w, http.StatusBadRequest, map[string]any{"status": "error", "message": err.Error()})
 		return
