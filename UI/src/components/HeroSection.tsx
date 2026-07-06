@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { axiosInstance } from "../utils/axios-config";
-import Toast from "./Toast";
-import UrlResultPopup from "./UrlResultPopup";
+import { useState } from 'react';
+import { axiosInstance } from '../utils/axios-config';
+import Toast from './Toast';
+import UrlResultPopup from './UrlResultPopup';
 
 function LinkIcon() {
   return (
@@ -57,14 +57,14 @@ function Spinner() {
 }
 
 const avatars = [
-  { bg: "from-violet-500 to-fuchsia-500" },
-  { bg: "from-amber-500 to-orange-500" },
-  { bg: "from-sky-500 to-cyan-500" },
-  { bg: "from-emerald-500 to-teal-500" },
+  { bg: 'from-violet-500 to-fuchsia-500' },
+  { bg: 'from-amber-500 to-orange-500' },
+  { bg: 'from-sky-500 to-cyan-500' },
+  { bg: 'from-emerald-500 to-teal-500' },
 ];
 
 function HeroSection() {
-  const [inputUrl, setInputUrl] = useState("");
+  const [inputUrl, setInputUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [shortUrl, setShortUrl] = useState<string | null>(null);
@@ -77,7 +77,7 @@ function HeroSection() {
     setError(null);
 
     try {
-      const response = await axiosInstance.post("/v1/url", {
+      const response = await axiosInstance.post('/v1/url', {
         url: inputUrl,
       });
 
@@ -86,7 +86,7 @@ function HeroSection() {
       setShowPopup(true);
     } catch (err: unknown) {
       const message =
-        err instanceof Error ? err.message : "Something went wrong";
+        err instanceof Error ? err.message : 'Something went wrong';
       setError(message);
     } finally {
       setLoading(false);
@@ -94,7 +94,7 @@ function HeroSection() {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !loading) {
+    if (e.key === 'Enter' && !loading) {
       handleGenerate();
     }
   };
@@ -103,7 +103,7 @@ function HeroSection() {
     <section className="relative min-h-screen bg-[#F7F7F5] flex items-start justify-center pt-[15vh] px-6">
       <div className="flex flex-col items-center w-full max-w-[900px] text-center">
         <span className="text-sm font-medium tracking-[8px] text-[#222] mb-8">
-          SIMPLIFY YOUR LINKS
+          URL CLIP
         </span>
 
         <h1 className="font-heading text-7xl desktop:text-8xl font-bold leading-[0.95] text-black mb-6">
@@ -156,7 +156,7 @@ function HeroSection() {
             {avatars.map((avatar, i) => (
               <div
                 key={i}
-                className={`w-11 h-11 rounded-full bg-gradient-to-br ${avatar.bg} border-2 border-white ${i > 0 ? "-ml-3" : ""} transition-transform duration-200 hover:translate-y-[-2px]`}
+                className={`w-11 h-11 rounded-full bg-gradient-to-br ${avatar.bg} border-2 border-white ${i > 0 ? '-ml-3' : ''} transition-transform duration-200 hover:translate-y-[-2px]`}
               />
             ))}
           </div>
