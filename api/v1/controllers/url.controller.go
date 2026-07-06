@@ -49,3 +49,14 @@ func CreateUrl(w http.ResponseWriter, r *http.Request) {
 
 	handlers.JsonHanlder(w, http.StatusCreated, map[string]any{"status": "success", "message": "Url created successfully", "data": url})
 }
+
+func DeleteAllUrls(w http.ResponseWriter, r *http.Request) {
+	database := r.Context().Value("DB").(*gorm.DB)
+
+	if err := v1Services.DeleteAllUrls(database); err != nil {
+		handlers.JsonHanlder(w, http.StatusInternalServerError, map[string]any{"status": "error", "message": err.Error()})
+		return
+	}
+
+	handlers.JsonHanlder(w, http.StatusOK, map[string]any{"status": "success", "message": "All urls deleted successfully"})
+}

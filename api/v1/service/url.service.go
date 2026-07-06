@@ -62,3 +62,10 @@ func GetUrlByUrlLink(database *gorm.DB, input_url string) {
 
 // 	return false, nil
 // }
+
+func DeleteAllUrls(database *gorm.DB) error {
+	var urls []db.Url
+	result := database.Unscoped().Delete(&urls)
+
+	return result.Error
+}

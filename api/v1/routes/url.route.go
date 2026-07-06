@@ -9,7 +9,7 @@ func urlRouter() chi.Router {
 	r := chi.NewRouter()
 	r.Get("/", v1Controllers.GetAllUrls)
 	r.Post("/", v1Controllers.CreateUrl)
-	//
+	r.Delete("/", v1Controllers.DeleteAllUrls)
 
 	return r
 }
