@@ -1,9 +1,9 @@
-import './App.css';
+import HeroSection from './components/HeroSection';
 
 function App() {
   return (
     <>
-      <h1 className="font-bold text-center mt-4">Hello to URL Clip</h1>
+      <HeroSection />
     </>
   );
 }
