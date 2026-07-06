@@ -15,7 +15,8 @@ func GetAllUrls(w http.ResponseWriter, r *http.Request) {
 
 	urls, err := v1Services.GetAllUrls(database)
 	if err != nil {
-		handlers.JsonHanlder(w, http.StatusInternalServerError, map[string]any{"status": "error", "message": err.Error()})
+		log.Println(err.Error())
+		handlers.JsonHanlder(w, http.StatusInternalServerError, map[string]any{"status": "error", "message": "Failed to get all urls"})
 		return
 	}
 
@@ -35,7 +36,8 @@ func CreateUrl(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&urlInput); err != nil {
-		handlers.JsonHanlder(w, http.StatusBadRequest, map[string]any{"status": "error", "message": err.Error()})
+		log.Println(err.Error())
+		handlers.JsonHanlder(w, http.StatusBadRequest, map[string]any{"status": "error", "message": "Failed to decode request body"})
 		return
 	}
 
@@ -43,7 +45,8 @@ func CreateUrl(w http.ResponseWriter, r *http.Request) {
 
 	url, err := v1Services.CreateUrl(urlInput.Url, database)
 	if err != nil {
-		handlers.JsonHanlder(w, http.StatusBadRequest, map[string]any{"status": "error", "message": err.Error()})
+		log.Println(err.Error())
+		handlers.JsonHanlder(w, http.StatusBadRequest, map[string]any{"status": "error", "message": "Failed to create url"})
 		return
 	}
 
@@ -54,7 +57,8 @@ func DeleteAllUrls(w http.ResponseWriter, r *http.Request) {
 	database := r.Context().Value("DB").(*gorm.DB)
 
 	if err := v1Services.DeleteAllUrls(database); err != nil {
-		handlers.JsonHanlder(w, http.StatusInternalServerError, map[string]any{"status": "error", "message": err.Error()})
+		log.Println(err.Error())
+		handlers.JsonHanlder(w, http.StatusInternalServerError, map[string]any{"status": "error", "message": "Failed to delete all urls"})
 		return
 	}
 
