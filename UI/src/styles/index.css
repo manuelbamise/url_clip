@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border list-none p-0 m-0 scroll-smooth;
+  }
+}
+
+@layer utilities {
+  /* TYPOGRAPHY */
+
+  .p-main {
+    @apply mobile:font-normal text-xl;
+  }
+  .p-tag {
+    @apply uppercase tracking-[0.5rem] text-sm small-mobile:text-lg;
+  }
+  .h1-bold {
+    @apply text-5xl tablet:text-6xl font-bold;
+  }
+  .h2-bold {
+    @apply font-bold text-3xl small-mobile:text-4xl mobile:text-5xl;
+  }
+  .h3-bold {
+    @apply text-2xl small-mobile:text-3xl laptop:text-2xl font-bold;
+  }
+
+  .dashboard-h1-bold {
+    @apply text-4xl mobile:text-5xl font-bold;
+  }
+
+  .dashboard-h2-bold {
+    @apply text-4xl font-bold
+  }
+
+  /* GENERAL STYLES */
+
+  /* BUTTONS */
+  .cta {
+    @apply px-6 py-4 laptop:py-3 border border-zinc-800 w-full mobile:w-fit text-center laptop:hover:scale-95 duration-150;
+  }
+  .cta-primary-black {
+    @apply bg-zinc-900 text-white cta;
+  }
+  .cta-primary-gray {
+    @apply text-black bg-zinc-200 cta;
+  }
+  .cta-secondary-white {
+    @apply bg-white border text-black border-black cta;
+  }
+
+  /* Dashboard btns */
+
+  .btn {
+    @apply bg-white text-black px-5 py-4 mobile:py-3 border border-zinc-400 w-full mobile:w-max text-center;
+  }
+}
+
+div#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+html,
+body {
+  font-family: "EB Garamond", serif;
+  font-optical-sizing: auto;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+a,
+p,
+label,
+button,
+::placeholder,
+input {
+  font-family: "Roboto", serif;
+}
+
+.mob-nav-link {
+  font-family: "EB Garamond", serif;
+}
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f100;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1f1f1f;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0e0e0e;
+}
+
+.active {
+  background: #f0f0f0;
+}
