@@ -47,22 +47,6 @@ func GetUrlByUrlCode(database *gorm.DB, url_code string) (*db.Url, error) {
 	return &url, result.Error
 }
 
-func GetUrlByUrlLink(database *gorm.DB, input_url string) {
-
-}
-
-// func UrlExistsByCode(database *gorm.DB, url_code string) (bool, error) {
-// 	var url db.Url
-// 	var count int64
-
-// 	result := database.Model(&url).Where("url_code=?", url_code).Count(&count)
-// 	if result.Error == nil {
-// 		return true, errors.New("Record already exists")
-// 	}
-
-// 	return false, nil
-// }
-
 func DeleteAllUrls(database *gorm.DB) error {
 	var urls []db.Url
 	result := database.Where("1=1").Delete(&urls)

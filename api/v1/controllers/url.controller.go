@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/go-chi/chi/v5"
 	"github.com/manuelbamise/url_clip/handlers"
 	v1Services "github.com/manuelbamise/url_clip/v1/service"
 	"gorm.io/gorm"
@@ -63,4 +64,19 @@ func DeleteAllUrls(w http.ResponseWriter, r *http.Request) {
 	}
 
 	handlers.JsonHanlder(w, http.StatusOK, map[string]any{"status": "success", "message": "All urls deleted successfully"})
+}
+
+func RedirectUrl(w http.ResponseWriter, r *http.Request) {
+	database := r.Context().Value("DB").(*gorm.DB)
+
+	urlCode := chi.URLParamFromCtx(r.Context(), "url_code")
+
+	url, err := v1Services.GetUrlByUrlCode(database, urlCode)
+	if err != nil {
+		log.Println(err.Error())
+		handlers.JsonHanlder(w, http.StatusNotFound, map[string]any{"status": "error", "message": "Url not found"})
+		return
+	}
+
+	http.Redirect(w, r, url.Url_link, http.StatusFound)
 }

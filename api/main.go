@@ -24,10 +24,7 @@ func main() {
 		log.Fatalf("failed to init database: %v", err)
 	}
 
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("welcome"))
-	})
-
+	r.Mount("/", MainRoute())
 	r.Mount("/v1", v1Routes.MainRouter())
 
 	log.Println("server started on :8080")
