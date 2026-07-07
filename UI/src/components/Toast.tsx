@@ -8,19 +8,27 @@ type ToastProps = {
 function Toast({ message, onClose }: ToastProps) {
   const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    if (message) {
-      setVisible(true);
-      const timer = setTimeout(() => {
-        setVisible(false);
-        setTimeout(onClose, 200);
-      }, 4000);
-      return () => clearTimeout(timer);
-    }
-    setVisible(false);
-  }, [message, onClose, setVisible]);
+  if (message) {
+    setVisible(true);
+    const timer = setTimeout(() => {
+      setVisible(false);
+      setTimeout(onClose, 200);
+    }, 4000);
+    return () => clearTimeout(timer);
+  }
+  setVisible(false);
+  // useEffect(() => {
+  // if (message) {
+  //   setVisible(true);
+  //   const timer = setTimeout(() => {
+  //     setVisible(false);
+  //     setTimeout(onClose, 200);
+  //   }, 4000);
+  //   return () => clearTimeout(timer);
+  // }
+  // setVisible(false);
 
-  if (!message) return null;
+  // }, [message, onClose, setVisible]);
 
   return (
     <div
