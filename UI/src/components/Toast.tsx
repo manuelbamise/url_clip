@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 type ToastProps = {
   message: string | null;
@@ -18,14 +18,14 @@ function Toast({ message, onClose }: ToastProps) {
       return () => clearTimeout(timer);
     }
     setVisible(false);
-  }, [message, onClose]);
+  }, [message, onClose, setVisible]);
 
   if (!message) return null;
 
   return (
     <div
       className={`fixed top-6 right-6 z-50 transition-all duration-300 ${
-        visible ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
+        visible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
       }`}
     >
       <div className="bg-[#1F1F1F] text-white px-5 py-4 border border-gray-700 flex items-center gap-4 min-w-[320px]">
@@ -37,7 +37,15 @@ function Toast({ message, onClose }: ToastProps) {
           }}
           className="text-white/60 hover:text-white transition-colors cursor-pointer"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          >
             <path d="M18 6 6 18" />
             <path d="m6 6 12 12" />
           </svg>
