@@ -150,7 +150,7 @@ function HeroSection() {
             )}
           </button>
         </div>
-
+        {/*
         <div className="flex items-center gap-7 mt-10">
           <div className="flex">
             {avatars.map((avatar, i) => (
@@ -176,7 +176,7 @@ function HeroSection() {
         >
           <path d="M5 60 C20 20, 30 70, 45 35 C55 15, 60 50, 70 30 C80 10, 85 50, 95 35" />
           <path d="M85 25 L95 35 L88 45" />
-        </svg>
+        </svg>*/}
       </div>
 
       <Toast message={error} onClose={() => setError(null)} />
