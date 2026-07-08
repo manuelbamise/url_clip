@@ -56,12 +56,12 @@ function Spinner() {
   );
 }
 
-const avatars = [
-  { bg: 'from-violet-500 to-fuchsia-500' },
-  { bg: 'from-amber-500 to-orange-500' },
-  { bg: 'from-sky-500 to-cyan-500' },
-  { bg: 'from-emerald-500 to-teal-500' },
-];
+// const avatars = [
+//   { bg: 'from-violet-500 to-fuchsia-500' },
+//   { bg: 'from-amber-500 to-orange-500' },
+//   { bg: 'from-sky-500 to-cyan-500' },
+//   { bg: 'from-emerald-500 to-teal-500' },
+// ];
 
 function HeroSection() {
   const [inputUrl, setInputUrl] = useState('');
