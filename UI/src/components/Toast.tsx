@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 type ToastProps = {
   message: string | null;
@@ -6,29 +6,20 @@ type ToastProps = {
 };
 
 function Toast({ message, onClose }: ToastProps) {
-  const [visible, setVisible] = useState(false);
+  // const [visible, setVisible] = useState(false);
+  const visible = !!message;
 
-  if (message) {
-    setVisible(true);
-    const timer = setTimeout(() => {
-      setVisible(false);
-      setTimeout(onClose, 200);
-    }, 4000);
-    return () => clearTimeout(timer);
-  }
-  setVisible(false);
-  // useEffect(() => {
-  // if (message) {
-  //   setVisible(true);
-  //   const timer = setTimeout(() => {
-  //     setVisible(false);
-  //     setTimeout(onClose, 200);
-  //   }, 4000);
-  //   return () => clearTimeout(timer);
-  // }
-  // setVisible(false);
-
-  // }, [message, onClose, setVisible]);
+  useEffect(() => {
+    if (message) {
+      // setVisible(true);
+      const timer = setTimeout(() => {
+        // setVisible(false);
+        setTimeout(onClose, 200);
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+    // setVisible(false);
+  }, [message, onClose]);
 
   return (
     <div
@@ -40,7 +31,7 @@ function Toast({ message, onClose }: ToastProps) {
         <span className="font-sans text-sm flex-1">{message}</span>
         <button
           onClick={() => {
-            setVisible(false);
+            // setVisible(false);
             setTimeout(onClose, 200);
           }}
           className="text-white/60 hover:text-white transition-colors cursor-pointer"
