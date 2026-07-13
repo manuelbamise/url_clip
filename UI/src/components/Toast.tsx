@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { X, AlertCircle } from 'lucide-react';
 
 type ToastProps = {
   message: string | null;
@@ -10,9 +11,7 @@ function Toast({ message, onClose }: ToastProps) {
 
   useEffect(() => {
     if (message) {
-      // setVisible(true);
       const timer = setTimeout(() => {
-        // setVisible(false);
         setTimeout(onClose, 200);
       }, 4000);
       return () => clearTimeout(timer);
@@ -22,30 +21,17 @@ function Toast({ message, onClose }: ToastProps) {
   return (
     <div
       className={`fixed top-6 right-6 z-50 transition-all duration-300 ${
-        visible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
+        visible ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0 pointer-events-none'
       }`}
     >
-      <div className="bg-[#1F1F1F] text-white px-5 py-4 border border-gray-700 flex items-center gap-4 min-w-[320px]">
-        <span className="font-sans text-sm flex-1">{message}</span>
+      <div className="bg-surface/90 backdrop-blur-xl border border-red-500/20 rounded-xl px-5 py-4 flex items-center gap-4 min-w-[320px] shadow-[0_0_30px_rgba(239,68,68,0.1)]">
+        <AlertCircle size={18} className="text-red-400 shrink-0" />
+        <span className="font-sans text-sm text-muted-light flex-1">{message}</span>
         <button
-          onClick={() => {
-            // setVisible(false);
-            setTimeout(onClose, 200);
-          }}
-          className="text-white/60 hover:text-white transition-colors cursor-pointer"
+          onClick={() => setTimeout(onClose, 200)}
+          className="text-muted hover:text-white transition-colors cursor-pointer shrink-0"
         >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          >
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
+          <X size={16} />
         </button>
       </div>
     </div>
