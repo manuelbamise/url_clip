@@ -6,7 +6,6 @@ type ToastProps = {
 };
 
 function Toast({ message, onClose }: ToastProps) {
-  // const [visible, setVisible] = useState(false);
   const visible = !!message;
 
   useEffect(() => {
@@ -18,7 +17,6 @@ function Toast({ message, onClose }: ToastProps) {
       }, 4000);
       return () => clearTimeout(timer);
     }
-    // setVisible(false);
   }, [message, onClose]);
 
   return (
